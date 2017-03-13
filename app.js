@@ -3,6 +3,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+app.use(express.static(__dirname+'/client'));
+
 app.use(bodyParser.json());
 
 Genre = require('./models/genre');
@@ -105,7 +107,7 @@ app.put('/api/books/:_id', function(req,res){
 	})
 });
 
-//DELTE book
+//DELETE book
 app.delete('/api/books/:_id', function(req,res){
 	var id = req.params._id;
 	book = req.body;

@@ -16,6 +16,7 @@ app.get('/', function(req, res){
 	res.send('Please use /api/books or /api/genres');
 });
 
+//GET all genres
 app.get('/api/genres', function(req,res){
 	Genre.getGenres(function(err, genres){
 		if(err){
@@ -25,6 +26,7 @@ app.get('/api/genres', function(req,res){
 	})
 });
 
+//ADD genre
 app.post('/api/genres', function(req,res){
 	var genre = req.body;
 	Genre.addGenres(genre, function(err, genre){
@@ -35,6 +37,7 @@ app.post('/api/genres', function(req,res){
 	})
 });
 
+//UPDATE genre
 app.put('/api/genres/:_id', function(req,res){
 	var id = req.params._id;
 	genre = req.body;
@@ -46,6 +49,20 @@ app.put('/api/genres/:_id', function(req,res){
 	})
 });
 
+//DELTE genre
+app.delete('/api/genres/:_id', function(req,res){
+	var id = req.params._id;
+	genre = req.body;
+	Genre.deleteGenre(id, function(err, genre){
+		if(err){
+			throw err;
+		}
+		res.json(genre);
+	})
+});
+
+
+//GET all books
 app.get('/api/books', function(req,res){
 	Book.getBooks(function(err, books){
 		if(err){
@@ -55,6 +72,7 @@ app.get('/api/books', function(req,res){
 	})
 });
 
+//GET a book by id
 app.get('/api/books/:_id', function(req,res){
 	Book.getBookById(req.params._id, function(err, book){
 		if(err){
@@ -64,6 +82,7 @@ app.get('/api/books/:_id', function(req,res){
 	})
 });
 
+//ADD book
 app.post('/api/books', function(req,res){
 	var book = req.body;
 	Book.addBook(book, function(err, book){
@@ -74,6 +93,7 @@ app.post('/api/books', function(req,res){
 	})
 });
 
+//UPDATE book
 app.put('/api/books/:_id', function(req,res){
 	var id = req.params._id;
 	book = req.body;
@@ -84,6 +104,19 @@ app.put('/api/books/:_id', function(req,res){
 		res.json(book);
 	})
 });
+
+//DELTE book
+app.delete('/api/books/:_id', function(req,res){
+	var id = req.params._id;
+	book = req.body;
+	Book.deleteBook(id, function(err, book){
+		if(err){
+			throw err;
+		}
+		res.json(book);
+	})
+});
+
 
 app.listen(3000);
 console.log("Listening on port 3000 .....");
